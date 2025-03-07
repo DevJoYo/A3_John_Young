@@ -45,8 +45,15 @@
         <div>
             <h1>A3 - React with Cards</h1>
             <div>
-                <button onClick={() => {console.log('Deal Card'), hand.push(dealCard()), console.log("hand: " + hand.map)}}>Deal Card</button>
+                <button onClick={() => dealCard()}>Deal Card!</button>
             </div>
+
+            <div className="cardArea">
+                {hand.map((card, index) =>
+                    <Card key={index} suit={card.suit} value={card.value} />
+                )}
+            </div>
+                
         </div>
         );
       }
