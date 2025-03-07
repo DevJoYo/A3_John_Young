@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+        StAuth10244: I John Young, 000371952 certify that this material is my original work.
+         No other person's work has been used without due acknowledgement. I have not made
+          my work available to anyone else.
+    -->
+    <meta charset="UTF-8" />
+    <title>A3 - React with Cards</title>
+
+    <!--ReactJs Libraries and Babel compiler from W3Schools-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!--css link-->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+      function Hello() {
+        return <h1>Hello World!</h1>;
+      }
+
+      const container = document.getElementById('mydiv');
+      const root = ReactDOM.createRoot(container);
+      root.render(<Hello />)
+    </script>
+
+  </body>
+</html>
