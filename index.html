@@ -24,6 +24,19 @@
       const cardSuits = ['♠', '♣', '♦', '♥'];
       const cardValues = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
 
+      function createDeck()
+      {
+        const newDeck = [];
+        for (let suit of cardSuits)
+        {
+          for (let value of cardValues)
+          {
+            newDeck.push({suit, value});
+          }
+        }
+        return newDeck;
+      }
+
       const Card = ({suit, value}) => {
         return (
           <div className="card">
@@ -36,30 +49,31 @@
       
 
       function Play(){
+        const [deck, setDeck] = React.useState(createDeck());
         const [hand, setHand] = React.useState([]);
 
         function dealCard(){
-        
-        let newSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
-        let newValue = cardValues[Math.floor(Math.random() * cardValues.length)];
-        let dealtCard = [{newSuit, newValue}];
-        setHand([...hand, dealtCard]); //set the hand to a copy of the old hand with the new card added
-      }
+            const dealtCards = [];
+            let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
+            let newCard = deck[index];
+            dealtCards.push(newCard);
+            setHand([...hand, ...dealtCards]); //set the hand to a copy of the old hand with the new card added
+        }
 
         return(
-        <div>
-            <h1>A3 - React with Cards</h1>
             <div>
-                <button onClick={() => dealCard()}>Deal Card!</button>
-            </div>
+                <h1>A3 - React with Cards</h1>
+                <div>
+                    <button onClick={() => dealCard()}>Deal Card!</button>
+                </div>
 
-            <div className="cardArea">
-                {hand.map((card, index) => (
-                    <Card key={index} suit={card.suit} value={card.value} />
-                ))}
+                <div className="cardArea">
+                    {hand.map((card, index) => (
+                        <Card key={index} suit={card.suit} value={card.value} />
+                    ))}
+                </div>
+                    
             </div>
-                
-        </div>
         );
       }
 
