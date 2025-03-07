@@ -43,7 +43,7 @@
         let newSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
         let newValue = cardValues[Math.floor(Math.random() * cardValues.length)];
         let dealtCard = [{newSuit, newValue}];
-        setHand(...hand, dealtCard); //set the hand to a copy of the old hand with the new card added
+        setHand([...hand, dealtCard]); //set the hand to a copy of the old hand with the new card added
       }
 
         return(
