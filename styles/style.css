@@ -55,3 +55,19 @@ h1{
     font-size: 48px;
     background-color: white;
 }
+
+.deckContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.deckArea{
+    margin: 10px;
+    background-color: cyan;
+    height: 100px;
+    width: 80px;
+    border: 1px solid black;
+    text-align: center;
+}

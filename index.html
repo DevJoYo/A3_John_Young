@@ -23,6 +23,7 @@
     <script type="text/babel">
       const cardSuits = ['♠', '♣', '♦', '♥'];
       const cardValues = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
+      let playStarted = false;
 
       function createDeck()
       {
@@ -50,24 +51,48 @@
       
 
       function Play(){
+        
         const [deck, setDeck] = React.useState(createDeck());
         const [hand, setHand] = React.useState([]);
 
-        function dealCard(){
-            const dealtCards = [];
-            let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
-            let newCard = deck[index];
-            dealtCards.push(newCard);
-            setHand([...hand, ...dealtCards]); //set the hand to a copy of the old hand with the new card added
+        let deckText;
+
+        if(deck.length === 0){
+            deckText = "No More Cards";
         }
+        else if(!playStarted){
+            deckText = "Click me to start dealing cards!";
+        }
+        else
+        {
+            deckText = "";
+        }
+
+        function dealCard(){
+            playStarted = true;
+            if(deck.length === 0){
+                return; //if the deck is empty, do nothing
+            }
+            else{
+                const dealtCards = [];
+                let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
+                let newCard = deck[index];
+                dealtCards.push(newCard);
+                deck.splice(index, 1); //remove the card from the deck
+                setHand([...hand, ...dealtCards]); //set the hand to a copy of the old hand with the new card added
+            }
+        }
+
 
         return(
             <div>
                 <h1>A3 - React with Cards</h1>
-                <div>
-                    <button onClick={() => dealCard()}>Deal Card!</button>
+                <div className="deckContainer">
+                    <div className="deckArea" onClick={() => dealCard()}>
+                        {deckText}
+            
+                    </div>
                 </div>
-
                 <div className="cardArea">
                     {hand.map((card, index) => (
                         <Card key={index} suit={card.suit} value={card.value} />
