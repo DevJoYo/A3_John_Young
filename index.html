@@ -40,8 +40,9 @@
       const Card = ({suit, value}) => {
         return (
           <div className="card">
-            <span>{suit}</span>
-            <span>{value}</span>
+            <span className="cardValue">{value}</span>
+            <span className="cardSuit">{suit}</span>
+            
           </div>
         );
       }
