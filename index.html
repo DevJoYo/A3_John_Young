@@ -33,14 +33,17 @@
         );
       }
 
-      function dealCard(){
-        let newSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
-        let newValue = cardValues[Math.floor(Math.random() * cardValues.length)];
-        return <Card suit={newSuit} value={newValue} />;
-      }
+      
 
       function Play(){
-        const hand = [];
+        const [hand, setHand] = React.useState([]);
+
+        function dealCard(){
+        let newSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
+        let newValue = cardValues[Math.floor(Math.random() * cardValues.length)];
+        setHand({suit: newSuit, value: newValue});
+      }
+
         return(
         <div>
             <h1>A3 - React with Cards</h1>
@@ -49,9 +52,9 @@
             </div>
 
             <div className="cardArea">
-                {hand.map((card, index) =>
+                {hand.map((card, index) => (
                     <Card key={index} suit={card.suit} value={card.value} />
-                )}
+                ))}
             </div>
                 
         </div>
