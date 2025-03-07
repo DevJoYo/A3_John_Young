@@ -75,7 +75,7 @@
                 let newDeck = [...currentDeck];
                 for(let i = 0; i < numCards; i++){
                     let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
-                    let newCard = newDeck[index];
+                    let newCard = newDeck[index];   
                     if(newCard){
                         dealtCards.push(newCard);
                         newDeck.splice(index, 1); //remove the card from the deck
