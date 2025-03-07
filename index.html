@@ -39,9 +39,11 @@
         const [hand, setHand] = React.useState([]);
 
         function dealCard(){
+        
         let newSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
         let newValue = cardValues[Math.floor(Math.random() * cardValues.length)];
-        setHand({suit: newSuit, value: newValue});
+        let dealtCard = [{newSuit, newValue}];
+        setHand(...hand, dealtCard); //set the hand to a copy of the old hand with the new card added
       }
 
         return(
