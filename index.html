@@ -93,12 +93,20 @@
             
                     </div>
                 </div>
+
+                <div className="buttonContainer">
+                    <button onClick={() => {}}>Deal 5</button>
+                    <button onClick={() => {}}>Deal 7</button>
+                    <button onClick={() => {}}>Reset</button>
+                    <button onClick={() => {}}>Toss</button>
+                    <button onClick={() => {}}>Wildcard</button>
+                    <button onClick={() => {}}>Regroup</button>
+                </div>
                 <div className="cardArea">
                     {hand.map((card, index) => (
                         <Card key={index} suit={card.suit} value={card.value} />
                     ))}
-                </div>
-                    
+                </div>  
             </div>
         );
       }
