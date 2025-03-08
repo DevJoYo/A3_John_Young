@@ -152,6 +152,12 @@
             setCardsInPlay([...cardsInPlay, newCard]);
             
         }
+        //regroup button
+        function regroup(){
+            let shuffledCards =  [...cardsInPlay];
+            shuffledCards.sort(() => Math.random() - 0.5);
+            setCardsInPlay(shuffledCards);
+        }
 
    
         return(
@@ -175,7 +181,7 @@
                     <button onClick={resetDeck}>Reset</button>
                     <button onClick={tossCard}>Toss</button>
                     <button onClick={wildCard}>Wildcard</button>
-                    <button onClick={() => {}}>Regroup</button>
+                    <button onClick={regroup}>Regroup</button>
                 </div>
 
                 <div className="cardArea">
