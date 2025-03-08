@@ -103,9 +103,22 @@
 
         function pickUpCard(card){
             if(cardInHand === card){
+                setCardInHand(null); //if the card is already picked up, set it back down
+            }
+            else if(cardInHand){ 
+                //if there is already a card picked up, swap the two cards
+                let tempCards = [...cardsInPlay];
+                let newIndex = tempCards.indexOf(card);
+                let oldIndex = tempCards.indexOf(cardInHand);
+
+                tempCards[oldIndex] = card;
+                tempCards[newIndex] = cardInHand;
+
+                setCardsInPlay(tempCards);
                 setCardInHand(null);
             }
             else{
+                //if there is no card picked up, pick up the card
                 setCardInHand(card);
             }
         }
