@@ -123,10 +123,28 @@
             }
         }
 
+        /*
+            Button functions
+        */
+        //reset button
         function resetDeck(){
             setCardsInPlay([]);
             setDeck(createDeck());
         }
+        //toss button
+        function tossCard(){
+            if(!cardInHand){
+                return;
+            }
+            else{
+                let tempCards = [...cardsInPlay];
+                let index = tempCards.indexOf(cardInHand);
+                tempCards.splice(index, 1);
+                setCardsInPlay(tempCards);
+                setCardInHand(null);
+            }
+        }
+
    
         return(
             <div>
@@ -147,7 +165,7 @@
                         dealCard(7, createDeck(), []);
                     }}>Deal 7</button>
                     <button onClick={resetDeck}>Reset</button>
-                    <button onClick={() => {}}>Toss</button>
+                    <button onClick={tossCard}>Toss</button>
                     <button onClick={() => {}}>Wildcard</button>
                     <button onClick={() => {}}>Regroup</button>
                 </div>
