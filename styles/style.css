@@ -57,6 +57,18 @@ h1{
     background-color: white;
 }
 
+.red{
+    color: red;
+}
+
+.black{
+    color: black;
+}
+
+.pickedUp{
+    border: 5px solid #db1608;
+}
+
 .deckContainer{
     display: flex;
     justify-content: center;
@@ -87,3 +99,4 @@ h1{
     margin: 10px;
     font-size: 2em;
 }
+

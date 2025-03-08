@@ -23,7 +23,6 @@
     <script type="text/babel">
       const cardSuits = ['♠', '♣', '♦', '♥'];
       const cardValues = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
-      let playStarted = false;
 
       function createDeck()
       {
@@ -38,12 +37,26 @@
         return newDeck;
       }
 
-      const Card = ({suit, value}) => {
+      const Card = ({suit, value, onClick, pickedUp}) => {
+        //String that will contain all classes applied to the cards
+        let cardClasses = "card";
+        let colourClass = "cardSuit";
+        //If the card is a heart or diamond, it will be red, otherwise it will be black
+        if(suit === '♦' || suit === '♥'){
+          colourClass += " red";
+        }
+        else{
+          colourClass += " black";
+        }
+        //adds the pickedUp class if the card has been picked up (clicked)
+        if(pickedUp){
+          cardClasses += " pickedUp";
+        }
+
         return (
-          <div className="card">
+          <div className={cardClasses} onClick={onClick}>
             <span className="cardValue">{value}</span>
-            <span className="cardSuit">{suit}</span>
-            
+            <span className={colourClass}>{suit}</span>
           </div>
         );
       }
@@ -51,7 +64,8 @@
       function Play(){
         
         const [deck, setDeck] = React.useState(createDeck());
-        let [cardsInPlay, setCardsInPlay] = React.useState([]);
+        const [cardsInPlay, setCardsInPlay] = React.useState([]);
+        const [cardInHand, setCardInHand] = React.useState(null);
 
         let deckText;
 
@@ -87,6 +101,15 @@
             }
         }
 
+        function pickUpCard(card){
+            if(cardInHand === card){
+                setCardInHand(null);
+            }
+            else{
+                setCardInHand(card);
+            }
+        }
+
         function resetDeck(){
             setCardsInPlay([]);
             setDeck(createDeck());
@@ -118,7 +141,7 @@
 
                 <div className="cardArea">
                     {cardsInPlay.map((card, index) => (
-                        <Card key={index} suit={card.suit} value={card.value} />
+                        <Card key={index} suit={card.suit} value={card.value} onClick={() => pickUpCard(card)} pickedUp={cardInHand === card}/>
                     ))}
                 </div>  
             </div>
