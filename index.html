@@ -21,6 +21,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
+    
       const cardSuits = ['♠', '♣', '♦', '♥'];
       const cardValues = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
 
@@ -70,7 +71,7 @@
         let deckText;
 
         if(deck.length === 0){
-            deckText = "No More Cards";
+            deckText = "No More Cards!";
         }
         else if(cardsInPlay.length === 0){
             deckText = "Click me to start dealing cards!";
@@ -163,32 +164,35 @@
         return(
             <div>
                 <h1>A3 - React with Cards</h1>
-                <div className="deckContainer">
-                    <div className="deckArea" onClick={() => dealCard(1, deck, cardsInPlay)}>
-                        {deckText}
+                <div className="playArea">
+
+                    <div className="deckContainer">
+                        <div className="deckArea" onClick={() => dealCard(1, deck, cardsInPlay)}>
+                            <p>{deckText}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="buttonContainer">
-                    <button onClick={() => {
-                        setCardsInPlay([]);
-                        dealCard(5, createDeck(), []);
-                    }}>Deal 5</button>
-                    <button onClick={() => {
-                        setCardsInPlay([]);
-                        dealCard(7, createDeck(), []);
-                    }}>Deal 7</button>
-                    <button onClick={resetDeck}>Reset</button>
-                    <button onClick={tossCard}>Toss</button>
-                    <button onClick={wildCard}>Wildcard</button>
-                    <button onClick={regroup}>Regroup</button>
-                </div>
+                    <div className="buttonContainer">
+                        <button onClick={() => {
+                            setCardsInPlay([]);
+                            dealCard(5, createDeck(), []);
+                        }}>Deal 5</button>
+                        <button onClick={() => {
+                            setCardsInPlay([]);
+                            dealCard(7, createDeck(), []);
+                        }}>Deal 7</button>
+                        <button onClick={resetDeck}>Reset</button>
+                        <button onClick={tossCard}>Toss</button>
+                        <button onClick={wildCard}>Wildcard</button>
+                        <button onClick={regroup}>Regroup</button>
+                    </div>
 
-                <div className="cardArea">
-                    {cardsInPlay.map((card, index) => (
-                        <Card key={index} suit={card.suit} value={card.value} onClick={() => pickUpCard(card)} pickedUp={cardInHand === card}/>
-                    ))}
-                </div>  
+                    <div className="cardArea">
+                        {cardsInPlay.map((card, index) => (
+                            <Card key={index} suit={card.suit} value={card.value} onClick={() => pickUpCard(card)} pickedUp={cardInHand === card}/>
+                        ))}
+                    </div>  
+                </div>
             </div>
         );
       }
