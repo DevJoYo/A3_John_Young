@@ -144,6 +144,14 @@
                 setCardInHand(null);
             }
         }
+        //wildcard button
+        function wildCard(){
+            let randomSuit = cardSuits[Math.floor(Math.random() * cardSuits.length)];
+            let randomValue = cardValues[Math.floor(Math.random() * cardValues.length)];
+            let newCard = {suit: randomSuit, value: randomValue};
+            setCardsInPlay([...cardsInPlay, newCard]);
+            
+        }
 
    
         return(
@@ -166,7 +174,7 @@
                     }}>Deal 7</button>
                     <button onClick={resetDeck}>Reset</button>
                     <button onClick={tossCard}>Toss</button>
-                    <button onClick={() => {}}>Wildcard</button>
+                    <button onClick={wildCard}>Wildcard</button>
                     <button onClick={() => {}}>Regroup</button>
                 </div>
 
