@@ -68,6 +68,7 @@
         const [deck, setDeck] = React.useState(createDeck());
         const [cardsInPlay, setCardsInPlay] = React.useState([]);
         const [cardInHand, setCardInHand] = React.useState(null);
+        const buttonRef = React.useRef(null);
         //text to display on the deck area
         let deckText;
         if(deck.length === 0){
@@ -82,18 +83,25 @@
         }
         //function to deal cards from the deck, takes in the number of cards to deal, the current deck, and the current cards in play
         function dealCard(numCards, currentDeck, currentCardsInPlay){
-            if(deck.length === 0){
-                return; //if the deck is empty, do nothing
+            if(deck.length === 0 && numCards === 1){
+                return; //if the deck is empty and the user tries to deal a card, do nothing
             }
             else{
                 let dealtCards = [];
                 let newDeck = [...currentDeck];
                 for(let i = 0; i < numCards; i++){
-                    let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
-                    let newCard = newDeck[index];   
-                    if(newCard){
-                        dealtCards.push(newCard);
-                        newDeck.splice(index, 1); //remove the card from the deck
+                    let cardExists = false;
+                    while(!cardExists){
+                        let index = Math.floor(Math.random() * deck.length); //get a random index within the range of number of cards in deck
+                        let newCard = newDeck[index];   
+                    //if(newCard){
+                    
+                        if(newCard)
+                        {
+                            dealtCards.push(newCard);
+                            newDeck.splice(index, 1); //remove the card from the deck
+                            cardExists = true;
+                        }
                     }
                 }
                 setCardsInPlay([...currentCardsInPlay, ...dealtCards]); //set the cards in the play area to a copy of the old version with the new card added
@@ -169,14 +177,8 @@
                     </div>
 
                     <div className="buttonContainer">
-                        <button onClick={() => {
-                            setCardsInPlay([]);
-                            dealCard(5, createDeck(), []);
-                        }}>Deal 5</button>
-                        <button onClick={() => {
-                            setCardsInPlay([]);
-                            dealCard(7, createDeck(), []);
-                        }}>Deal 7</button>
+                        <button onClick={() => {dealCard(5, createDeck(), []);}}>Deal 5</button>
+                        <button onClick={() => {dealCard(7, createDeck(), []);}}>Deal 7</button>
                         <button onClick={resetDeck}>Reset</button>
                         <button onClick={tossCard}>Toss</button>
                         <button onClick={wildCard}>Wildcard</button>
