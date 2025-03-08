@@ -17,14 +17,15 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    
-    <div id="root"></div>
+    <!--root div for React to render to-->
+    <div id="root"></div> 
 
+    <!--React script-->
     <script type="text/babel">
-    
+      //card suits and values
       const cardSuits = ['♠', '♣', '♦', '♥'];
       const cardValues = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
-
+      //function to create the deck of cards
       function createDeck()
       {
         let newDeck = [];
@@ -37,7 +38,7 @@
         }
         return newDeck;
       }
-
+      //create a card component
       const Card = ({suit, value, onClick, pickedUp}) => {
         //String that will contain all classes applied to the cards
         let cardClasses = "card";
@@ -62,14 +63,13 @@
         );
       }
 
-      function Play(){
-        
+      function Client(){
+        //React hooks to manage state
         const [deck, setDeck] = React.useState(createDeck());
         const [cardsInPlay, setCardsInPlay] = React.useState([]);
         const [cardInHand, setCardInHand] = React.useState(null);
-
+        //text to display on the deck area
         let deckText;
-
         if(deck.length === 0){
             deckText = "No More Cards!";
         }
@@ -80,7 +80,7 @@
         {
             deckText = "";
         }
-
+        //function to deal cards from the deck, takes in the number of cards to deal, the current deck, and the current cards in play
         function dealCard(numCards, currentDeck, currentCardsInPlay){
             if(deck.length === 0){
                 return; //if the deck is empty, do nothing
@@ -95,16 +95,16 @@
                         dealtCards.push(newCard);
                         newDeck.splice(index, 1); //remove the card from the deck
                     }
-                    
                 }
                 setCardsInPlay([...currentCardsInPlay, ...dealtCards]); //set the cards in the play area to a copy of the old version with the new card added
                 setDeck(newDeck); //set the deck to the new deck
             }
         }
-
+        //function to pick up a card and handle related tasks (swapping, setting down)
         function pickUpCard(card){
             if(cardInHand === card){
-                setCardInHand(null); //if the card is already picked up, set it back down
+                //if the card is already picked up, set it back down
+                setCardInHand(null); 
             }
             else if(cardInHand){ 
                 //if there is already a card picked up, swap the two cards
@@ -123,10 +123,7 @@
                 setCardInHand(card);
             }
         }
-
-        /*
-            Button functions
-        */
+        //button functions
         //reset button
         function resetDeck(){
             setCardsInPlay([]);
@@ -159,8 +156,7 @@
             shuffledCards.sort(() => Math.random() - 0.5);
             setCardsInPlay(shuffledCards);
         }
-
-   
+        //return the JSX for the client
         return(
             <div>
                 <h1>A3 - React with Cards</h1>
@@ -196,10 +192,11 @@
             </div>
         );
       }
-
+      //render the client to the root div
       const container = document.getElementById('root');
       const root = ReactDOM.createRoot(container);
-      root.render(<Play/>)
+      root.render(<Client/>)
+
     </script>
   </body>
 </html>

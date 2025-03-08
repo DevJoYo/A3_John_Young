@@ -4,10 +4,10 @@
     list-style-type: none;
     text-decoration: none;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-   
     background-color: #16a529;
 }
 
+/*title rules*/
 h1{
     text-align: center;
     font-size: 2em;
@@ -15,6 +15,7 @@ h1{
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+/*content area rules*/
 .playArea{
     border-style: solid;
     border-width: 10px;
@@ -24,6 +25,7 @@ h1{
     margin: 0.5em auto;
 }
 
+/*card rules*/
 .cardArea{
     display: flex;
     flex-wrap: wrap;
@@ -44,6 +46,7 @@ h1{
     align-items: center;
     justify-content: center;
     margin: 5px;
+    transition: transform 0.5s ease;
 }
 
 .cardSuit{
@@ -67,9 +70,12 @@ h1{
 }
 
 .pickedUp{
-    border: 5px solid #db1608;
+    border: 2px solid #db1608;
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+    transform: scale(1.1);
 }
 
+/*deck rules*/
 .deckContainer{
     display: flex;
     justify-content: center;
@@ -92,10 +98,10 @@ h1{
 
 .deckArea p{
     background-color: #4585c9;
-    
     text-align: center;
 }
 
+/*button rules*/
 .buttonContainer{
     display: flex;
     justify-content: center;
@@ -111,3 +117,12 @@ h1{
     font-size: 2em;
 }
 
+.buttonContainer button:hover{
+    background-color: #db1608;
+    color: white;
+}
+
+/*stop highlighting text on click*/
+::selection {
+    background: none;
+  }
